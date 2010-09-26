@@ -1,0 +1,22 @@
+{{extend 'my_layout.html'}}
+<div class="right">
+   <h2 align="center">
+      <a>{{=T( request.args(0).replace('_',' ').capitalize() )}}</a>
+   </h2>
+   {{=form}}
+</div>
+
+<div class="left">
+   {{if request.args(0)=='login':}}
+   <h2>Options:</h2>
+      <ul>
+      {{if not 'register' in auth.settings.actions_disabled:}}
+	 <li><a href="{{=URL(r=request,args='register')}}">Register</a></li>
+      {{pass}}
+      {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
+      <li><a href="{{=URL(r=request,args='request_reset_password')}}"
+	 >Lost Password</a></li>
+      {{pass}}
+      </ul>
+   {{pass}}
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{=T.accepted_language or 'en'}}">
+  <head>
+    <title>{{=response.title or request.application}}</title>
+    <link rel="shortcut icon"
+	  href="{{=URL(request.application,'static','favicon.ico')}}" 
+	  type="image/vnd.microsoft.icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    {{#------  require CSS and JS files for this page (read info in base.css) ------}}
+    {{response.files.append(URL(request.application,'static','style.css'))}}
+    {{#------ include web2py specific js code (jquery, calendar, form stuff) ------}}
+    {{include 'web2py_ajax.html'}}
+  </head>
+<body>
+
+   <div id="wrap">
+
+   <div id="header">
+	 {{try:}}{{=auth.navbar(action=URL(request.application,
+	    'default','user'))}}
+	 {{except:pass}}
+      <h1><a href={{=URL(c='default', f='index')}} name="top">Pedro Batista</a></h1>
+      <h2>Personal home page</h2>
+   </div>
+
+   <div id="menu">
+      <ul>
+	 {{menu=[('Home', URL(c='default', f='index')),
+	 ('Projects', URL(c='projects', f='list')),
+	 ('Links', URL()),
+	 ('SiteMap', URL()),
+	 ('About', URL())]}}
+	 {{if auth.user and auth.has_membership(auth.user.id, role='admin'):}}
+	    {{menu.append(('Admin', URL(c='admin', f='index')))}}
+	    {{pass}}
+	 {{for menu_item in menu:}}
+	    {{id=''}}
+	    {{if response.menu_selected == menu_item[0]:}}
+	       {{id='menu_selected'}}
+	       {{pass}}
+	    {{=LI(A(menu_item[0], _href=menu_item[1]), _id=id)}}
+	    {{pass}}
+      </ul>
+   </div>
+
+   <div id="content">
+      {{include}}
+      <div style="clear: both;"> </div>
+   </div>
+
+   <div id="bottom"> </div>
+   <div id="footer">
+      Designed by <a href="http://www.free-css-templates.com/">Free CSS Templates</a> and <a href="http://www.laps.ufpa.br/pedro">Pedro Batista</a>, Thanks to <a href="http://www.openwebdesign.org/">Web Design Company</a>
+   </div>
+
+   </div>
+
+</body>
+</html>

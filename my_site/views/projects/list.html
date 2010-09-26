@@ -1,0 +1,18 @@
+{{extend 'my_layout.html'}}
+
+<div class="right">
+   {{for project in projects:}}
+      {{=H2(A(project.title, _href="#", _name=project.id))}}
+      {{=MARKMIN(project.description)}}
+      {{=A('top', _href=URL(r=request, anchor='top'))}}
+      {{pass}}
+</div>
+
+<div class="left">
+   <h2>Projects:</h2>
+   <ul>
+      {{for project in projects:}}
+	 <li>{{=A(project.title, _href=URL(r=request, anchor=str(project.id)))}}</li>
+	 {{pass}}
+   </ul>
+</div>

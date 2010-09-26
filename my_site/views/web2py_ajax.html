@@ -1,0 +1,11 @@
+{{
+for _k,_file in enumerate(response.files or []):
+  if _file in response.files[:_k]:
+     continue
+  elif _file.lower().endswith('.css'):}}
+     <link href="{{=_file}}" rel="stylesheet" type="text/css" />{{
+  elif _file.lower().endswith('.js'):}}
+     <script src="{{=_file}}" type="text/javascript"></script>{{
+  pass
+pass
+}}
