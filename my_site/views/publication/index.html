@@ -10,7 +10,7 @@
 	 {{=A(last_year, href='#', _name=str(last_year))}}
 	 {{pass}}
       {{=LI(XML(publication.authors + '. "' + 
-	 str(I(publication.title)) + '". In: ' + 
+	 str(I(B(publication.title))) + '". In: ' + 
 	 publication.conference + ', ' + 
 	 publication.place + ', ' +
 	 str(publication.year) + '.'))}}
