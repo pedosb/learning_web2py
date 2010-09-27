@@ -49,3 +49,13 @@ CREATE TABLE project(
     description TEXT
 );
 success!
+timestamp: 2010-09-26T23:36:31.102248
+CREATE TABLE publication(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    authors CHAR(512),
+    title CHAR(512),
+    conference CHAR(512),
+    place CHAR(512),
+    year INTEGER
+);
+success!

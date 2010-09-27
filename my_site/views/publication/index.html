@@ -1,0 +1,32 @@
+{{extend 'my_layout.html'}}
+
+<div class=right>
+   <h2>Publications</h2>
+   <ul>
+   {{last_year = ''}}
+   {{for publication in publications:}}
+      {{if last_year != publication.year:}}
+	 {{last_year = publication.year}}
+	 {{=A(last_year, href='#', _name=str(last_year))}}
+	 {{pass}}
+      {{=LI(XML(publication.authors + '. "' + 
+	 str(I(publication.title)) + '". In: ' + 
+	 publication.conference + ', ' + 
+	 publication.place + ', ' +
+	 str(publication.year) + '.'))}}
+      {{pass}}
+   </ul>
+</div>
+
+<div class=left>
+   <h2>Year:</h2>
+   <ul>
+   {{last_year = ''}}
+   {{for publication in publications:}}
+      {{if last_year != publication.year:}}
+	 {{last_year = publication.year}}
+	 {{=LI(A(last_year, _href=URL(r=request, anchor=str(last_year))))}}
+	 {{pass}}
+      {{pass}}
+   </ul>
+</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{=T.accepted_language or 'en'}}">
   <head>
-    <title>{{=response.title or request.application}}</title>
+    <title>{{=((response.title or request.application) + ' - Pedro Home Page')}}</title>
     <link rel="shortcut icon"
 	  href="{{=URL(request.application,'static','favicon.ico')}}" 
 	  type="image/vnd.microsoft.icon">
@@ -27,6 +27,7 @@
       <ul>
 	 {{menu=[('Home', URL(c='default', f='index')),
 	 ('Projects', URL(c='projects', f='list')),
+	 ('Publications', URL(c='publication', f='index')),
 	 ('Links', URL()),
 	 ('SiteMap', URL()),
 	 ('About', URL())]}}

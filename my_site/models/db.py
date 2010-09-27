@@ -98,3 +98,16 @@ db.define_table('project',
 
 db.project.title.requires = IS_NOT_IN_DB(db, db.project.title)
 db.project.description.requires = IS_NOT_EMPTY()
+
+db.define_table('publication',
+      Field('authors'),
+      Field('title'),
+      Field('conference'),
+      Field('place'),
+      Field('year', 'integer'))
+
+db.publication.title.requires = IS_NOT_IN_DB(db, db.publication.title)
+db.publication.authors.requires = IS_NOT_EMPTY()
+db.publication.conference.requires = IS_NOT_EMPTY()
+db.publication.place.requires = IS_NOT_EMPTY()
+db.publication.year.requires = IS_NOT_EMPTY()
