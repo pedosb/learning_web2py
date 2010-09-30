@@ -5,15 +5,15 @@
    <ul>
    {{last_year = ''}}
    {{for publication in publications:}}
-      {{if last_year != publication.year:}}
-	 {{last_year = publication.year}}
+      {{if last_year != publication.event.year:}}
+	 {{last_year = publication.event.year}}
 	 {{=A(last_year, href='#', _name=str(last_year))}}
 	 {{pass}}
       {{=LI(XML(publication.authors + '. "' + 
 	 str(I(B(publication.title))) + '". In: ' + 
-	 publication.conference + ', ' + 
-	 publication.place + ', ' +
-	 str(publication.year) + '.'))}}
+	 publication.event.title + ', ' + 
+	 publication.event.place + ', ' +
+	 str(publication.event.year) + '.'))}}
       {{pass}}
    </ul>
 </div>
@@ -23,8 +23,8 @@
    <ul>
    {{last_year = ''}}
    {{for publication in publications:}}
-      {{if last_year != publication.year:}}
-	 {{last_year = publication.year}}
+      {{if last_year != publication.event.year:}}
+	 {{last_year = publication.event.year}}
 	 {{=LI(A(last_year, _href=URL(r=request, anchor=str(last_year))))}}
 	 {{pass}}
       {{pass}}

@@ -99,15 +99,37 @@ db.define_table('project',
 db.project.title.requires = IS_NOT_IN_DB(db, db.project.title)
 db.project.description.requires = IS_NOT_EMPTY()
 
-db.define_table('publication',
-      Field('authors'),
+db.define_table('event',
       Field('title'),
-      Field('conference'),
+      Field('abbreviation'),
       Field('place'),
       Field('year', 'integer'))
 
+db.event.title.requires = IS_NOT_EMPTY()
+db.event.abbreviation.requires = IS_NOT_EMPTY()
+db.event.place.requires = IS_NOT_EMPTY()
+db.event.year.requires = IS_NOT_EMPTY()
+
+db.define_table('publication',
+      Field('authors'),
+      Field('title'),
+      Field('event', db.event))
+
+format_event = lambda e: str(e.abbreviation) + '(' + str(e.year) + ')'
+
 db.publication.title.requires = IS_NOT_IN_DB(db, db.publication.title)
 db.publication.authors.requires = IS_NOT_EMPTY()
-db.publication.conference.requires = IS_NOT_EMPTY()
-db.publication.place.requires = IS_NOT_EMPTY()
-db.publication.year.requires = IS_NOT_EMPTY()
+db.publication.event.requires = IS_IN_DB(db, db.event.id,
+      format_event)
+
+db.define_table('presentation',
+      Field('title'),
+      Field('description', 'text'),
+      Field('pdf', 'upload'),
+      Field('event', db.event))
+
+db.presentation.title.requires = IS_NOT_EMPTY()
+db.presentation.description.requires = IS_NOT_EMPTY()
+db.presentation.pdf.requires = IS_NOT_EMPTY()
+db.presentation.event.requires = IS_IN_DB(db, db.event.id,
+      format_event)

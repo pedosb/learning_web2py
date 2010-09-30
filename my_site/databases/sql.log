@@ -1,4 +1,4 @@
-timestamp: 2010-09-25T23:20:21.316439
+timestamp: 2010-09-29T23:03:19.142535
 CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name CHAR(128),
@@ -9,21 +9,21 @@ CREATE TABLE auth_user(
     reset_password_key CHAR(512)
 );
 success!
-timestamp: 2010-09-25T23:20:21.410975
+timestamp: 2010-09-29T23:03:19.238241
 CREATE TABLE auth_group(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2010-09-25T23:20:21.474023
+timestamp: 2010-09-29T23:03:19.306953
 CREATE TABLE auth_membership(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
     group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE
 );
 success!
-timestamp: 2010-09-25T23:20:21.564796
+timestamp: 2010-09-29T23:03:19.381477
 CREATE TABLE auth_permission(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE,
@@ -32,7 +32,7 @@ CREATE TABLE auth_permission(
     record_id INTEGER
 );
 success!
-timestamp: 2010-09-25T23:20:21.649364
+timestamp: 2010-09-29T23:03:19.449012
 CREATE TABLE auth_event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
@@ -42,20 +42,37 @@ CREATE TABLE auth_event(
     description TEXT
 );
 success!
-timestamp: 2010-09-26T05:01:01.608830
+timestamp: 2010-09-29T23:03:19.541300
 CREATE TABLE project(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2010-09-26T23:36:31.102248
-CREATE TABLE publication(
+timestamp: 2010-09-29T23:03:19.607360
+CREATE TABLE event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    authors CHAR(512),
     title CHAR(512),
-    conference CHAR(512),
     place CHAR(512),
     year INTEGER
 );
 success!
+timestamp: 2010-09-29T23:03:19.673789
+CREATE TABLE publication(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    authors CHAR(512),
+    title CHAR(512),
+    event INTEGER REFERENCES event(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2010-09-29T23:04:02.206377
+CREATE TABLE presentation(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(512),
+    description CHAR(512),
+    pdf CHAR(512),
+    event INTEGER REFERENCES event(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2010-09-30T00:02:00.936108
+ALTER TABLE event ADD abbreviation CHAR(512);

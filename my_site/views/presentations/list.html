@@ -1,0 +1,34 @@
+{{extend 'my_layout.html'}}
+
+<div class=right>
+   <h2>Publications</h2>
+   <ul>
+   {{last_year = ''}}
+   {{for presentation in presentations:}}
+      {{if last_year != presentation.event.year:}}
+	 {{last_year = presentation.event.year}}
+	 {{=A(last_year, href='#', _name=str(last_year))}}
+	 {{pass}}
+      {{=LI(XML('"' + 
+	 str(A(I(B(presentation.title)), _href=URL('download', args=presentation.pdf))) + '".' +
+	 str(BR()) + str(presentation.description) +
+	 str(BR()) + ' In: ' + 
+	 presentation.event.title + ', ' + 
+	 presentation.event.place + ', ' +
+	 str(presentation.event.year) + '.'))}}
+      {{pass}}
+   </ul>
+</div>
+
+<div class=left>
+   <h2>Year:</h2>
+   <ul>
+   {{last_year = ''}}
+   {{for presentation in presentations:}}
+      {{if last_year != presentation.event.year:}}
+	 {{last_year = presentation.event.year}}
+	 {{=LI(A(last_year, _href=URL(r=request, anchor=str(last_year))))}}
+	 {{pass}}
+      {{pass}}
+   </ul>
+</div>

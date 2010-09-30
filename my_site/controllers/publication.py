@@ -1,7 +1,8 @@
 
 def index():
+   #TODO Make this return ordered by year
    publications = db().select(db.publication.ALL,
-	 orderby=db.publication.year)
+	 orderby=db.event)
    response.menu_selected = 'Publications'
    response.title = 'Publications'
    return dict(publications = publications)
@@ -13,3 +14,4 @@ def create():
    response.menu_selected = 'Admin'
    response.title = 'New Publication'
    return dict(form_publication = form_publication)
+
